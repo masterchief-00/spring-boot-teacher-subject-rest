@@ -1,12 +1,14 @@
 package com.kwizera.spring_boot_teacher_subject.mappers.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import com.kwizera.spring_boot_teacher_subject.domain.DTO.TeacherDTO;
 import com.kwizera.spring_boot_teacher_subject.domain.Entities.TeacherEntity;
-import com.kwizera.spring_boot_teacher_subject.mappers.Mappers;
+import com.kwizera.spring_boot_teacher_subject.mappers.Mapper;
 
-public class TeacherMapperImpl implements Mappers<TeacherEntity, TeacherDTO> {
+@Component
+public class TeacherMapperImpl implements Mapper<TeacherEntity, TeacherDTO> {
 
     private ModelMapper modelMapper;
 

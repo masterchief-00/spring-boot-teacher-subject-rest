@@ -2,40 +2,47 @@ package com.kwizera.spring_boot_teacher_subject.services.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.springframework.stereotype.Service;
 
 import com.kwizera.spring_boot_teacher_subject.domain.Entities.SubjectEntity;
+import com.kwizera.spring_boot_teacher_subject.repositories.SubjectRepository;
 import com.kwizera.spring_boot_teacher_subject.services.SubjectServices;
 
+@Service
 public class SubjectServicesImpl implements SubjectServices {
+
+    private SubjectRepository subjectRepository;
+
+    public SubjectServicesImpl(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
 
     @Override
     public Optional<SubjectEntity> findSubject(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findSubject'");
+        return subjectRepository.findById(id);
     }
 
     @Override
     public List<SubjectEntity> findAllSubjects() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAllSubjects'");
+        return StreamSupport.stream(subjectRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
     @Override
     public SubjectEntity createSubject(SubjectEntity subjectEntity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createSubject'");
+        return subjectRepository.save(subjectEntity);
     }
 
     @Override
     public boolean subjectExists(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'subjectExists'");
+        return subjectRepository.existsById(id);
     }
 
     @Override
     public void deleteSubject(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteSubject'");
+        subjectRepository.deleteById(id);
     }
 
 }

@@ -13,6 +13,8 @@ public interface SubjectServices {
 
     SubjectEntity createSubject(SubjectEntity subjectEntity);
 
+    SubjectEntity updateSubject(String id, SubjectEntity subjectEntity);
+
     boolean subjectExists(String id);
 
     void deleteSubject(String id);

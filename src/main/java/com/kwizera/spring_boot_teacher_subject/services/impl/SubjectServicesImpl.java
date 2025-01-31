@@ -45,4 +45,16 @@ public class SubjectServicesImpl implements SubjectServices {
         subjectRepository.deleteById(id);
     }
 
+    @Override
+    public SubjectEntity updateSubject(String id, SubjectEntity subjectEntity) {
+        subjectEntity.setId(id);
+
+        return subjectRepository.findById(id).map(existingSubject -> {
+            Optional.ofNullable(subjectEntity.getCode()).ifPresent(existingSubject::setCode);
+            Optional.ofNullable(subjectEntity.getTeacherEntity()).ifPresent(existingSubject::setTeacherEntity);
+
+            return subjectRepository.save(existingSubject);
+        }).orElseThrow(() -> new RuntimeException("Subject not found"));
+    }
+
 }

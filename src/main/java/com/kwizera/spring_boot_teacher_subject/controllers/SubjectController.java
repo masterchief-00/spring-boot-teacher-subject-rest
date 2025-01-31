@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kwizera.spring_boot_teacher_subject.domain.DTO.SubjectDTO;
@@ -21,7 +22,11 @@ import com.kwizera.spring_boot_teacher_subject.domain.Entities.SubjectEntity;
 import com.kwizera.spring_boot_teacher_subject.mappers.Mapper;
 import com.kwizera.spring_boot_teacher_subject.services.SubjectServices;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+@RequestMapping("/api")
+@Tag(name = "Subject Controller", description = "This controller exposes endpoints to allow CRUD operations regarding the subject API")
 public class SubjectController {
 
     private Mapper<SubjectEntity, SubjectDTO> subjectMapper;

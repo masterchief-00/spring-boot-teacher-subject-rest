@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,6 +47,13 @@ public class TeacherController {
         List<TeacherEntity> allTeachers = teacherServices.findTeachers();
 
         return allTeachers.stream().map(teacherMapper::mapTo).collect(Collectors.toList());
+    }
+
+    @GetMapping(path = "/teachers/paginated")
+    public Page<TeacherDTO> paginatedTeachers(Pageable pageable) {
+        Page<TeacherEntity> allTeachers = teacherServices.findTeachersPaginated(pageable);
+
+        return allTeachers.map(teacherMapper::mapTo);
     }
 
     @GetMapping(path = "/teachers/{id}")

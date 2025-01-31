@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.kwizera.spring_boot_teacher_subject.domain.Entities.TeacherEntity;
@@ -14,7 +16,7 @@ import com.kwizera.spring_boot_teacher_subject.services.TeacherServices;
 @Service
 public class TeacherServicesImpl implements TeacherServices {
 
-    TeacherRepository teacherRepository;
+    private TeacherRepository teacherRepository;
 
     public TeacherServicesImpl(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
@@ -28,6 +30,11 @@ public class TeacherServicesImpl implements TeacherServices {
     @Override
     public List<TeacherEntity> findTeachers() {
         return StreamSupport.stream(teacherRepository.findAll().spliterator(), false).collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<TeacherEntity> findTeachersPaginated(Pageable pageable) {
+        return teacherRepository.findAll(pageable);
     }
 
     @Override
